@@ -1,20 +1,12 @@
 package cmd
 
-import (
-	"example.com/ft/scheduler"
-	"example.com/ft/store"
-)
+import "example.com/ft/service"
 
-// CreateTask is the marked entry point. It calls an unmarked helper
-// (validateInput → a [no marker] stop) and a marked store op (Insert →
-// accountability-transfer stop). scheduler is imported but only referenced as
-// a value, never CALLED — a dead import.
+// CreateTask is the entry point. Calls the service layer (depth 1, marked),
+// which calls the repo layer (depth 2, marked), which calls an unmarked helper
+// (depth 3 — trace ends there).
 //
 // a10n:blueprint Components.TaskService.Commands.create_task
 func CreateTask() {
-	validateInput()
-	store.Insert()
-	_ = scheduler.Name
+	service.Create()
 }
-
-func validateInput() {}
