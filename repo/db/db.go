@@ -1,4 +1,4 @@
-package internal
+package db
 
 // Write is unmarked — trace ends here at depth 3.
 func Write() {}
